@@ -62,6 +62,7 @@ public class IndexController extends BaseController {
      */
     @GetMapping(value = {"/", "index"})
     public String index(HttpServletRequest request, @RequestParam(value = "limit", defaultValue = "12") int limit) {
+        System.out.println("hello world");
         return this.index(request, 1, limit);
     }
 
