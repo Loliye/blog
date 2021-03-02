@@ -16,6 +16,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
+import java.util.Calendar;
 
 @MapperScan("com.my.blog.website.dao")
 @SpringBootApplication
@@ -49,6 +50,8 @@ public class CoreApplication extends SpringBootServletInitializer
 
 
     public static void main(String[] args) {
-        SpringApplication.run(CoreApplication.class, args);
+//        SpringApplication.run(CoreApplication.class, args);
+        System.out.println("1-2-3-4".replace("-",""));
     }
+
 }

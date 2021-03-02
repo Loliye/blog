@@ -7,8 +7,14 @@
     <artifactId>my-blog</artifactId>
     <!-- now -->
     <version>3.0.1-SNAPSHOT</version>
+    <modules>
+        <module>blog-application</module>
+        <module>blog-domain</module>
+        <module>blog-infrastructure</module>
+        <module>blog-interface</module>
+    </modules>
 
-    <packaging>war</packaging>
+    <packaging>pom</packaging>
 
     <name>my-blog</name>
     <description>My Java Blog project for Spring Boot</description>
@@ -38,6 +44,17 @@
                 </exclusion>
             </exclusions>
         </dependency>-->
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
