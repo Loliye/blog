@@ -1,6 +1,9 @@
 package com.mikufans.blog.domain.aggregate.attach;
 
 import com.github.pagehelper.PageInfo;
+import com.mikufans.blog.infrastructure.repository.attach.AttachPo;
+
+import java.util.List;
 
 public interface AttachRepository {
     /**
@@ -9,17 +12,13 @@ public interface AttachRepository {
      * @param limit
      * @return
      */
-    PageInfo<AttachEntity> getAttachs(Integer page, Integer limit);
+    List<AttachPo> getAttachs(Integer page, Integer limit);
 
     /**
      * 保存附件
      *
-     * @param fname
-     * @param fkey
-     * @param ftype
-     * @param author
      */
-    void save(String fname, String fkey, String ftype, Integer author);
+    void save(AttachPo attachPo);
 
     /**
      * 根据附件id查询附件

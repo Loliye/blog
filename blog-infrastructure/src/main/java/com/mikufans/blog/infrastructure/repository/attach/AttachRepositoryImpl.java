@@ -5,16 +5,18 @@ import com.mikufans.blog.domain.aggregate.attach.AttachEntity;
 import com.mikufans.blog.domain.aggregate.attach.AttachRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AttachRepositoryImpl implements AttachRepository {
 
     @Override
-    public PageInfo<AttachEntity> getAttachs(Integer page, Integer limit) {
+    public List<AttachPo> getAttachs(Integer page, Integer limit) {
         return null;
     }
 
     @Override
-    public void save(String fname, String fkey, String ftype, Integer author) {
+    public void save(AttachPo attachPo) {
 
     }
 

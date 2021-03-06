@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class HttpUtil {
-    public static HttpServletRequest getReqeust()
+    public static HttpServletRequest getRequest()
     {
         ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = servletRequestAttributes.getRequest();
@@ -20,5 +20,6 @@ public class HttpUtil {
         HttpServletResponse response = servletRequestAttributes.getResponse();
         return response;
     }
+
 
 }

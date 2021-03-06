@@ -7,5 +7,5 @@ import org.springframework.stereotype.Component;
 @Component
 @Configurable
 @MapperScan("com.mikufans.blog.infrastructure.repository")
-public class BlogBoot {
+public class BlogStart {
 }
