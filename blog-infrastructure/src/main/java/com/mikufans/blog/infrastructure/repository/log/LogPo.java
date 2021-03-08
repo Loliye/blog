@@ -1,10 +1,12 @@
 package com.mikufans.blog.infrastructure.repository.log;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.io.Serializable;
 
 @Data
+@Builder
 public class LogPo implements Serializable {
     /**
      * 日志主键

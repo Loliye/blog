@@ -1,5 +1,10 @@
 package com.mikufans.blog.domain.aggregate.user;
 
+import lombok.Builder;
+import lombok.Data;
+
+@Data
+@Builder
 public class UserEntity {
     /**
      * user表主键

@@ -1,9 +1,13 @@
 package com.mikufans.bloginterface.common.util;
 
+import com.mikufans.blog.infrastructure.common.CommonUtil;
 import com.mikufans.blog.infrastructure.common.DateKit;
+import com.mikufans.blog.infrastructure.common.WebConst;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -13,6 +17,29 @@ import java.net.URLDecoder;
 import java.util.Date;
 
 public class TaleUtil {
+
+
+
+    /**
+     * 设置记住密码cookie
+     *
+     * @param response
+     * @param uid
+     */
+    public static void setCookie(HttpServletResponse response, Integer uid) {
+        try {
+            String val = CommonUtil.enAes(uid.toString(), WebConst.AES_SALT);
+            boolean isSSL = false;
+            Cookie cookie = new Cookie(WebConst.USER_IN_COOKIE, val);
+            cookie.setPath("/");
+            cookie.setMaxAge(60 * 30);
+            cookie.setSecure(isSSL);
+            response.addCookie(cookie);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public static String getFileKey(String name) {
         String prefix = "/upload" + DateKit.dateFormat(new Date(), "yyyy/MM");
