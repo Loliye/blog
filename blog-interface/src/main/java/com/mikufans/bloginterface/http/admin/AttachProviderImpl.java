@@ -1,17 +1,23 @@
-package com.mikufans.bloginterface.http.attach;
+package com.mikufans.bloginterface.http.admin;
 
 import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
 import com.mikufans.blog.application.service.AttachAppService;
+import com.mikufans.blog.application.service.LogAppService;
 import com.mikufans.blog.domain.aggregate.attach.AttachEntity;
+import com.mikufans.blog.domain.aggregate.log.LogEntity;
+import com.mikufans.blog.domain.aggregate.user.UserEntity;
+import com.mikufans.blog.infrastructure.common.CommonUtil;
 import com.mikufans.blog.infrastructure.common.DateKit;
+import com.mikufans.blog.infrastructure.repository.attach.AttachRepository;
+import com.mikufans.blog.infrastructure.repository.log.LogActionEnum;
 import com.mikufans.blog.infrastructure.repository.user.UserPo;
 import com.mikufans.bloginterface.common.RestResponseDto;
 import com.mikufans.bloginterface.common.constant.Types;
 import com.mikufans.blog.infrastructure.common.WebConst;
 import com.mikufans.bloginterface.common.exception.TipException;
 import com.mikufans.bloginterface.common.util.Commons;
-import com.mikufans.bloginterface.common.util.HttpUtil;
+import com.mikufans.blog.infrastructure.common.HttpUtil;
 import com.mikufans.bloginterface.common.util.TaleUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -37,6 +43,9 @@ public class AttachProviderImpl {
 
     @Resource
     private AttachAppService attachAppService;
+
+    @Resource
+    private LogAppService logAppService;
 
     /**
      * 附件页面
@@ -67,7 +76,7 @@ public class AttachProviderImpl {
     public RestResponseDto upload(@RequestParam("file") MultipartFile[] multipartFiles) throws IOException {
         HttpServletRequest request = HttpUtil.getRequest();
         HttpServletResponse response = HttpUtil.getResponse();
-        UserPo user = TaleUtil.getLoginUser(request);
+        UserEntity user = CommonUtil.getLoginUser();
         List<String> errorFiles = Lists.newArrayList();
         try {
             request.setCharacterEncoding("utf-8");
@@ -90,8 +99,7 @@ public class AttachProviderImpl {
                     errorFiles.add(fname);
                 }
             }
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             return RestResponseDto.fail();
         }
@@ -103,14 +111,32 @@ public class AttachProviderImpl {
      * 删除附件
      *
      * @param id
-     * @param request
      * @return
      */
     @RequestMapping(value = "delete")
     @ResponseBody
     @Transactional(rollbackFor = TipException.class)
-    public RestResponseDto delete(@RequestParam Integer id, HttpServletRequest request) {
-        return null;
+    public RestResponseDto delete(@RequestParam Integer id) {
+        HttpServletRequest request = HttpUtil.getRequest();
+        try {
+            AttachEntity attachEntity = attachAppService.getAttachById(id);
+            if (attachEntity == null)
+                return RestResponseDto.fail("不存在该附件");
+            new File(CLASSPATH + attachEntity.getFkey()).delete();
+            attachAppService.deleteById(id);
+            LogEntity logEntity = LogEntity.builder().action(LogActionEnum.DELl_ATTACH.getAction())
+                    .data(attachEntity.getFkey()).ip(request.getRemoteAddr())
+                    .authorId(CommonUtil.getLoginUser().getUid())
+                    .build();
+            logAppService.insertLog(logEntity);
+        } catch (Exception e) {
+            String msg = "附件删除失败";
+            if (e instanceof TipException)
+                msg = e.getMessage();
+            else log.error(msg, e);
+            return RestResponseDto.fail(msg);
+        }
+        return RestResponseDto.ok();
     }
 
 }

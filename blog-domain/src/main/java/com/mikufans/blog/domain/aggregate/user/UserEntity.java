@@ -2,9 +2,11 @@ package com.mikufans.blog.domain.aggregate.user;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
+@NoArgsConstructor
 public class UserEntity {
     /**
      * user表主键

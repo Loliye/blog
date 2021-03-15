@@ -1,6 +1,9 @@
 package com.mikufans.blog.infrastructure.common;
 
+import com.google.gson.Gson;
+import com.mikufans.blog.domain.aggregate.user.UserEntity;
 import com.mikufans.blog.infrastructure.repository.user.UserPo;
+import org.apache.commons.lang3.StringUtils;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
@@ -13,6 +16,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 
 public class CommonUtil {
@@ -87,10 +92,55 @@ public class CommonUtil {
         return false;
     }
 
-    public static UserPo getLoginUser(HttpServletRequest request) {
+    public static UserEntity getLoginUser() {
+        HttpServletRequest request = HttpUtil.getRequest();
         HttpSession session = request.getSession();
         if (session == null)
             return null;
-        return (UserPo) session.getAttribute(WebConst.LOGIN_SESSION_KEY);
+        return (UserEntity) session.getAttribute(WebConst.LOGIN_SESSION_KEY);
     }
+
+    /**
+     * 替换HTML脚本
+     *
+     * @param value
+     * @return
+     */
+    public static String cleanXSS(String value) {
+        //You'll need to remove the spaces from the html entities below
+        value = value.replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+        value = value.replaceAll("\\(", "&#40;").replaceAll("\\)", "&#41;");
+        value = value.replaceAll("'", "&#39;");
+        value = value.replaceAll("eval\\((.*)\\)", "");
+        value = value.replaceAll("[\\\"\\\'][\\s]*javascript:(.*)[\\\"\\\']", "\"\"");
+        value = value.replaceAll("script", "");
+        return value;
+    }
+
+    public static String toJsonString(Object o) {
+        return o == null ? null : new Gson().toJson(o);
+    }
+
+    public static String MD5encode(String source) {
+        if (StringUtils.isBlank(source))
+            return null;
+        MessageDigest messageDigest = null;
+        try {
+            messageDigest = MessageDigest.getInstance("MD5");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
+        byte[] digest = messageDigest.digest(source.getBytes());
+        StringBuilder hexString =new StringBuilder();
+        for(byte b:digest)
+        {
+            String hex=Integer.toHexString(0xff&b);
+            if(hex.length()==1)
+                hexString.append("0");
+            hexString.append(hex);
+        }
+        return hexString.toString();
+    }
+
 }

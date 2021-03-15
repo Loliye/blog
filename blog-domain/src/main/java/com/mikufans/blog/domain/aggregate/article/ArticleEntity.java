@@ -1,11 +1,11 @@
-package com.mikufans.blog.infrastructure.repository.content;
+package com.mikufans.blog.domain.aggregate.article;
 
+import lombok.Builder;
 import lombok.Data;
 
-import java.io.Serializable;
-
 @Data
-public class ContentPo implements Serializable {
+@Builder
+public class ArticleEntity {
     /**
      * post表主键
      */
@@ -85,6 +85,4 @@ public class ContentPo implements Serializable {
      * 内容文字
      */
     private String content;
-
-    private static final long serialVersionUID = 1L;
 }

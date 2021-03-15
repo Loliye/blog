@@ -1,4 +1,4 @@
-package com.mikufans.bloginterface.common.util;
+package com.mikufans.blog.infrastructure.common;
 
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;

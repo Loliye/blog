@@ -16,4 +16,14 @@ public class UserAppService {
         return null;
     }
 
+
+    public UserEntity queryUserById(Integer uid)
+    {
+        return null;
+    }
+
+    public void updateByUid(UserEntity userEntity)
+    {
+
+    }
 }

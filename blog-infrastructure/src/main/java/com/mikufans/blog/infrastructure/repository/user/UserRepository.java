@@ -1,10 +1,10 @@
 package com.mikufans.blog.infrastructure.repository.user;
 
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Service;
 
-@Mapper
-public interface UserMapper {
+@Service
+public interface UserRepository {
     /**
      * 更改用户信息
      * @param userPo

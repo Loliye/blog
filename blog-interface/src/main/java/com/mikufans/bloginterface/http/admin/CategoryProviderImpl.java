@@ -1,4 +1,4 @@
-package com.mikufans.bloginterface.http.category;
+package com.mikufans.bloginterface.http.admin;
 
 import com.mikufans.blog.application.service.MetaAppService;
 import com.mikufans.blog.domain.aggregate.meta.MetaEntity;
@@ -6,7 +6,7 @@ import com.mikufans.blog.infrastructure.common.WebConst;
 import com.mikufans.bloginterface.common.RestResponseDto;
 import com.mikufans.bloginterface.common.constant.Types;
 import com.mikufans.bloginterface.common.exception.TipException;
-import com.mikufans.bloginterface.common.util.HttpUtil;
+import com.mikufans.blog.infrastructure.common.HttpUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;

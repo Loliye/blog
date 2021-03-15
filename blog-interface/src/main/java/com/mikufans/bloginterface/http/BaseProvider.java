@@ -1,8 +1,8 @@
 package com.mikufans.bloginterface.http;
 
+import com.mikufans.blog.domain.aggregate.user.UserEntity;
 import com.mikufans.blog.infrastructure.common.CommonUtil;
 import com.mikufans.blog.infrastructure.common.MapCache;
-import com.mikufans.blog.infrastructure.repository.user.UserPo;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -35,8 +35,8 @@ public abstract class BaseProvider {
      * @param request
      * @return
      */
-    public UserPo user(HttpServletRequest request) {
-        return CommonUtil.getLoginUser(request);
+    public UserEntity user(HttpServletRequest request) {
+        return CommonUtil.getLoginUser();
     }
 
     public Integer getUid(HttpServletRequest request){

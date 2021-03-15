@@ -1,7 +1,7 @@
 package com.mikufans.blog.application.service;
 
 import com.mikufans.blog.domain.aggregate.log.LogEntity;
-import com.mikufans.blog.domain.aggregate.log.LogRespository;
+import com.mikufans.blog.infrastructure.repository.log.LogRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -11,7 +11,7 @@ import java.util.List;
 public class LogAppService {
 
     @Resource
-    private LogRespository logRespository;
+    private LogRepository logRespository;
 
     public void insertLog(LogEntity logEntity)
     {

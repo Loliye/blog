@@ -14,6 +14,20 @@ public class MetaAppService {
     @Resource
     private MetaDomainService metaDomainService;
 
+    public MetaEntity getMeta(String type,String name)
+    {
+        return null;
+    }
+
+    public List<MetaEntity> getMetas(String types)
+    {
+        return null;
+    }
+
+    public Integer countMeta(Integer id)
+    {
+        return null;
+    }
     public void addMeta(MetaEntity metaEntity) {
 
     }

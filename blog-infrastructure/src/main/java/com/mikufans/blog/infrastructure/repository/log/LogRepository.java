@@ -1,11 +1,14 @@
-package com.mikufans.blog.domain.aggregate.log;
+package com.mikufans.blog.infrastructure.repository.log;
 
-import com.mikufans.blog.infrastructure.repository.log.LogPo;
+import com.mikufans.blog.domain.aggregate.log.LogEntity;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public interface LogRespository {
+@Mapper
+public interface LogRepository {
     /**
      * 添加日志
      * @param logDomain
