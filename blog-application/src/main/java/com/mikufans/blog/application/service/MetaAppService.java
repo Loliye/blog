@@ -32,7 +32,7 @@ public class MetaAppService {
 
     }
 
-    public void saveMeta(String type,String name,Integer mid){
+    public void saveMeta(Integer id,String name,String type){
 
     }
 

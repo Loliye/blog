@@ -1,5 +1,6 @@
 package com.mikufans.blog.application.service;
 
+import com.mikufans.blog.domain.aggregate.article.ArticleEntity;
 import com.mikufans.blog.domain.aggregate.comment.CommentEntity;
 import com.mikufans.blog.domain.aggregate.statistics.StatisticsEntity;
 import org.springframework.stereotype.Service;

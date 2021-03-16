@@ -7,7 +7,7 @@ import com.mikufans.blog.application.service.OptionAppService;
 import com.mikufans.blog.application.service.SiteAppService;
 import com.mikufans.blog.domain.aggregate.option.OptionEntity;
 import com.mikufans.bloginterface.common.RestResponseDto;
-import com.mikufans.bloginterface.common.exception.TipException;
+import com.mikufans.blog.infrastructure.common.TipException;
 import com.mikufans.blog.infrastructure.common.HttpUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

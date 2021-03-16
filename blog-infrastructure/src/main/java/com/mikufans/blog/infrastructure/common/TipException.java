@@ -1,4 +1,4 @@
-package com.mikufans.bloginterface.common.exception;
+package com.mikufans.blog.infrastructure.common;
 
 public class TipException extends RuntimeException {
 

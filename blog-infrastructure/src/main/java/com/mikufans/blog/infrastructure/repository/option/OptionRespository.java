@@ -11,6 +11,8 @@ public interface OptionRespository {
 
     int updateOptionByName(OptionPo optionPo);
 
+    void insertOption(OptionPo optionPo);
+
     OptionPo getOptionByName(@Param("name") String name);
 
     List<OptionPo> getOptions();

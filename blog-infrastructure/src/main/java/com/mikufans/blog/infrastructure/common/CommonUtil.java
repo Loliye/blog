@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.mikufans.blog.domain.aggregate.user.UserEntity;
 import com.mikufans.blog.infrastructure.repository.user.UserPo;
 import org.apache.commons.lang3.StringUtils;
+import org.commonmark.parser.Parser;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
@@ -11,6 +12,7 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.sql.DataSource;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -19,10 +21,32 @@ import java.nio.channels.FileChannel;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CommonUtil {
 
     private static final Random random = new Random();
+    private static DataSource newDataSource;
+    /**
+     * 一个月
+     */
+    private static final int one_month = 30 * 24 * 60 * 60;
+    /**
+     * 匹配邮箱正则
+     */
+    private static final Pattern VALID_EMAIL_ADDRESS_REGEX =
+            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+    private static final Pattern SLUG_REGEX = Pattern.compile("^[A-Za-z0-9_-]{5,100}$", Pattern.CASE_INSENSITIVE);
+    /**
+     * markdown解析器
+     */
+    private static Parser parser = Parser.builder().build();
+    /**
+     * 获取文件所在目录
+     */
+    private static String location = CommonUtil.class.getClassLoader().getResource("").getPath();
+
 
     public static void copyFileUsingFileChannels(File source, File dest) throws IOException {
         FileChannel inputChannel = null;
@@ -142,5 +166,23 @@ public class CommonUtil {
         }
         return hexString.toString();
     }
+
+    /**
+     * 判断是否是合法路径
+     *
+     * @param slug
+     * @return
+     */
+    public static boolean isPath(String slug) {
+        if (StringUtils.isNotBlank(slug)) {
+            if (slug.contains("/") || slug.contains(" ") || slug.contains(".")) {
+                return false;
+            }
+            Matcher matcher = SLUG_REGEX.matcher(slug);
+            return matcher.find();
+        }
+        return false;
+    }
+
 
 }

@@ -8,7 +8,7 @@ import com.mikufans.blog.domain.aggregate.user.UserEntity;
 import com.mikufans.blog.infrastructure.common.CommonUtil;
 import com.mikufans.blog.infrastructure.common.HttpUtil;
 import com.mikufans.bloginterface.common.RestResponseDto;
-import com.mikufans.bloginterface.common.exception.TipException;
+import com.mikufans.blog.infrastructure.common.TipException;
 import com.vdurmont.emoji.EmojiParser;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

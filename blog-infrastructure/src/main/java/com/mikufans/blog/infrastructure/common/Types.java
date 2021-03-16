@@ -1,4 +1,4 @@
-package com.mikufans.bloginterface.common.constant;
+package com.mikufans.blog.infrastructure.common;
 
 public enum Types {
     TAG("tag"),

@@ -5,7 +5,7 @@ import com.mikufans.blog.application.service.UserAppService;
 import com.mikufans.blog.domain.aggregate.user.UserEntity;
 import com.mikufans.blog.infrastructure.common.WebConst;
 import com.mikufans.bloginterface.common.RestResponseDto;
-import com.mikufans.bloginterface.common.exception.TipException;
+import com.mikufans.blog.infrastructure.common.TipException;
 import com.mikufans.blog.infrastructure.common.HttpUtil;
 import com.mikufans.bloginterface.common.util.IPUtil;
 import com.mikufans.bloginterface.common.util.TaleUtil;
